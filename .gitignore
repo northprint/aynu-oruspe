@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Raw data sources (re-downloadable, large binary files)
+# NINJALのparquetは1ファイル500MB超のため除外
+data-sources/raw/
+
+# Translation cache (中間生成物)
+scripts/translation_cache.json
+
+# Not for public release
+prototype/
+article.md
+
+# OS / Editor
+.DS_Store
+*.local

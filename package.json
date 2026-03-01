@@ -1,0 +1,29 @@
+{
+  "name": "aynu-oruspe",
+  "version": "1.0.0",
+  "description": "Japanese to Ainu language dictionary web app",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "build:dict": "python3 scripts/build_full_dictionary.py"
+  },
+  "keywords": [
+    "ainu",
+    "dictionary",
+    "language"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@duckdb/duckdb-wasm": "^1.33.1-dev18.0",
+    "@sglkc/kuromoji": "^1.1.0",
+    "lit": "^3.3.2",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-plugin-cross-origin-isolation": "^0.1.6"
+  }
+}

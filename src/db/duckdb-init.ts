@@ -21,8 +21,16 @@ export async function getDB(): Promise<duckdb.AsyncDuckDB> {
   const selected = await duckdb.selectBundle(bundle);
   const logger = new duckdb.ConsoleLogger();
   const worker = new Worker(selected.mainWorker!);
+  worker.onerror = (e) => console.error('DuckDB worker error:', e);
   const db = new duckdb.AsyncDuckDB(logger, worker);
-  await db.instantiate(selected.mainModule);
+
+  const TIMEOUT_MS = 30_000;
+  await Promise.race([
+    db.instantiate(selected.mainModule),
+    new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error(`DuckDB instantiation timed out after ${TIMEOUT_MS / 1000}s`)), TIMEOUT_MS),
+    ),
+  ]);
 
   await db.registerFileURL(
     'dictionary.parquet',
